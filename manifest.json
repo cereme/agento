@@ -1,0 +1,39 @@
+{
+  "name": "agento",
+  "version": "0.0.1",
+  "description": "agento",
+  "manifest_version": 2,
+  "author": "cereme",
+  "permissions": [
+      "*://*.wanted.co.kr/*",
+      "*://wanted.co.kr/*",
+      "*://*.mma.go.kr/*",
+      "*://wtfismyip.com/*",
+      "downloads",
+      "tabs",
+      "storage"
+  ],
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ]
+  },
+  "content_scripts": [{
+      "matches": [
+          "*://*.wanted.co.kr/*",
+          "*://wanted.co.kr/*"
+      ],
+      "all_frames": true,
+      "js": [
+          "src/utils.js",
+          "src/vendors/wanted.js",
+          "src/strategyFactory.js",
+          "src/inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+      "default_popup": "src/index.html"
+  }
+}
