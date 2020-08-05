@@ -14,6 +14,7 @@ class WantedCompanyPageStrategy extends Strategy{
   }
   buildElement(infoObject){
     let element = document.createElement("div");
+    element.setAttribute("id", "agento-elem");
     for(let key of Object.keys(infoObject)){
       let row = document.createElement("p");
       row.innerText = `${key}: ${infoObject[key]}`
@@ -22,7 +23,10 @@ class WantedCompanyPageStrategy extends Strategy{
     return element;
   }
   insertElement(element){
-    // TODO: 뒤로가기 하면 Element가 2번 삽입되는 버그 해결
+    let agentoElement = document.getElementById("agento-elem");
+    if(agentoElement){
+      agentoElement.remove();
+    }
     let container = getElementByXpath(`//h3[.='태그']/..`);
     container.insertAdjacentElement('afterbegin', element);
   }
