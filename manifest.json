@@ -7,6 +7,8 @@
   "permissions": [
       "*://*.wanted.co.kr/*",
       "*://wanted.co.kr/*",
+      "*://*.jobplanet.co.kr/*",
+      "*://jobplanet.co.kr/*",
       "*://*.mma.go.kr/*",
       "*://wtfismyip.com/*",
       "downloads",
@@ -21,7 +23,9 @@
   "content_scripts": [{
       "matches": [
           "*://*.wanted.co.kr/*",
-          "*://wanted.co.kr/*"
+          "*://wanted.co.kr/*",
+          "*://*.jobplanet.co.kr/*",
+          "*://jobplanet.co.kr/*"
       ],
       "all_frames": true,
       "js": [
