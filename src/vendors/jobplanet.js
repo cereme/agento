@@ -45,17 +45,6 @@ class JobplanetCompanyPageStrategy extends Strategy{
     let container = document.getElementById("sideContents");
     container.insertAdjacentElement('afterbegin', element);
   }
-  render(){
-    (async () => {
-      let companyName = await this.getCompanyName();
-      let infoObject = await this.getCompanyInfo(companyName);
-      if(Object.keys(infoObject).length === 0){
-        infoObject = await this.getCompanyInfo(companyName.replace(/\(.*?\)/g, ""));
-      }
-      let agentoElement = this.buildElement(infoObject);
-      this.insertElement(agentoElement);
-    })();
-  }
 }
 
 export {
