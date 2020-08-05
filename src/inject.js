@@ -1,3 +1,5 @@
+import {strategyFactory} from './strategyFactory';
+
 let strategy = strategyFactory(document.location.href);
 if(strategy){
   strategy.render();

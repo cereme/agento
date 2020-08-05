@@ -33,3 +33,10 @@ class Strategy{
     insertElement(element){}
     render(){}
 }
+
+export {
+  Strategy,
+  getElementByXpath,
+  waitUntilElementExistsBySelector,
+  waitUntilElementExistsByXPath
+}

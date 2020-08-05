@@ -1,3 +1,5 @@
+import { WantedCompanyPageStrategy } from './vendors/wanted';
+
 var strategyRegexMap = new Map();
 strategyRegexMap.set(/^https?:\/\/www.wanted.co.kr\/company\/\d+/, new WantedCompanyPageStrategy());
 
@@ -7,4 +9,8 @@ function strategyFactory(url){
       return strategyRegexMap.get(regex);
     }
   }
+}
+
+export {
+  strategyFactory
 }

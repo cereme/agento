@@ -1,4 +1,6 @@
-class WantedCompanyPageStrategy extends Strategy {
+import { Strategy, waitUntilElementExistsByXPath, getElementByXpath } from '../utils';
+
+class WantedCompanyPageStrategy extends Strategy{
   getCompanyName(){
     return waitUntilElementExistsByXPath(`//img[@alt="Company Logo"]/../h2`).then(elem => elem.innerText);
   }
@@ -32,4 +34,8 @@ class WantedCompanyPageStrategy extends Strategy {
       this.insertElement(agentoElement);
     })();
   }
+}
+
+export {
+  WantedCompanyPageStrategy
 }
