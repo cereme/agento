@@ -21,13 +21,16 @@ async function searchFromPortal(query){
   }
   
   let href = hrefElem.getAttribute("href");
+  let companyName = hrefElem.innerText;
 
   resp = await fetch(`https://work.mma.go.kr${href}`);
   resp = await resp.text();
   htmlDoc = parser.parseFromString(resp, 'text/html');
 
   let tbody = htmlDoc.querySelector("#content > div:nth-child(2) > table > tbody");
-  let resultObject = {};
+  let resultObject = {
+    companyName
+  };
   for(let tr of tbody.querySelectorAll("tr")){
     let ths = tr.querySelectorAll("th");
     let tds = tr.querySelectorAll("td");
