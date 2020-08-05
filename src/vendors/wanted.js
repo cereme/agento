@@ -15,11 +15,22 @@ class WantedCompanyPageStrategy extends Strategy{
   buildElement(infoObject){
     let element = document.createElement("div");
     element.setAttribute("id", "agento-elem");
+    element.style.marginTop = "10px";
+    element.style.marginBottom = "10px";
+
+    let title = document.createElement("h3");
+    title.innerText = "병역정보";
+    element.appendChild(title);
+
+    let infoArea = document.createElement("div");
+    infoArea.style.paddingLeft = "5px";
+
     for(let key of Object.keys(infoObject)){
       let row = document.createElement("p");
       row.innerText = `${key}: ${infoObject[key]}`
-      element.appendChild(row);
+      infoArea.appendChild(row);
     }
+    element.appendChild(infoArea);
     return element;
   }
   insertElement(element){
