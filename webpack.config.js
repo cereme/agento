@@ -1,4 +1,5 @@
 const ChromeExtensionReloader  = require('webpack-chrome-extension-reloader');
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 let config = {
@@ -17,7 +18,13 @@ let config = {
     output: {
         path: path.resolve(__dirname, 'dist')
     },
-    plugins: [],
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                { from: 'src/index.html', to: 'index.html'}
+            ]
+        })
+    ],
 };
 
 module.exports = (env, args) => {
