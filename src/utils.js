@@ -3,8 +3,8 @@ function getElementByXpath(path) {
 }
 
 function _waitUntilElementExists(evaluator){
-  return new Promise((resolve, reject) => {
-    let observer = new MutationObserver((mutations) => {
+  return new Promise(resolve => {
+    let observer = new MutationObserver(() => {
       let evaluated = evaluator();
       if(evaluated){
         resolve(evaluated);
@@ -28,9 +28,9 @@ function waitUntilElementExistsByXPath(path){
 
 class Strategy{
     getCompanyName(){}
-    getCompanyInfo(companyName){}
-    buildElement(infoObject){}
-    insertElement(element){}
+    getCompanyInfo(){}
+    buildElement(){}
+    insertElement(){}
     render(){
       (async () => {
         let companyName = await this.getCompanyName();

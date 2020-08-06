@@ -29,7 +29,7 @@ async function searchFromPortal(query){
 
   let tbody = htmlDoc.querySelector("#content > div:nth-child(2) > table > tbody");
   let resultObject = {
-    companyName
+    "회사명": companyName,
   };
   for(let tr of tbody.querySelectorAll("tr")){
     let ths = tr.querySelectorAll("th");
@@ -37,6 +37,8 @@ async function searchFromPortal(query){
     resultObject[ths[0].innerText] = tds[0].innerText;
     resultObject[ths[1].innerText] = tds[1].innerText;
   }
+  delete resultObject["주생산물"];
+  delete resultObject["연구분야"];
   return resultObject;
 }
 
@@ -49,7 +51,7 @@ chrome.runtime.onMessage.addListener(
 
 // https://stackoverflow.com/questions/34957319/how-to-listen-for-url-change-with-chrome-extension
 chrome.runtime.onInstalled.addListener(function() {
-  chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
     if (changeInfo.status === 'complete') {
       chrome.tabs.sendMessage(tabId, {
         message: 'TabUpdated'
