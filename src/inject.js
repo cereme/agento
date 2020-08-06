@@ -5,7 +5,7 @@ if(strategy){
   strategy.render();
 }
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (request) {
   if (request.message === 'TabUpdated') {
     let strategy = strategyFactory(document.location.href);
     if(strategy){
