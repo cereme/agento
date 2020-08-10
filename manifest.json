@@ -9,6 +9,8 @@
       "*://wanted.co.kr/*",
       "*://*.jobplanet.co.kr/*",
       "*://jobplanet.co.kr/*",
+      "*://*.rocketpunch.com/*",
+      "*://rocketpunch.com/*",
       "*://*.mma.go.kr/*",
       "*://wtfismyip.com/*",
       "downloads",
@@ -25,7 +27,9 @@
           "*://*.wanted.co.kr/*",
           "*://wanted.co.kr/*",
           "*://*.jobplanet.co.kr/*",
-          "*://jobplanet.co.kr/*"
+          "*://jobplanet.co.kr/*",
+          "*://*.rocketpunch.com/*",
+          "*://rocketpunch.com/*"
       ],
       "all_frames": true,
       "js": [
