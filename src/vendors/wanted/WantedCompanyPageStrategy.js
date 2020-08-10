@@ -1,4 +1,4 @@
-import { Strategy, waitUntilElementExistsByXPath, getElementByXpath } from '../utils';
+import { Strategy, waitUntilElementExistsByXPath, getElementByXpath } from '../../utils';
 
 class WantedCompanyPageStrategy extends Strategy{
   getCompanyName(){
@@ -61,5 +61,5 @@ class WantedCompanyPageStrategy extends Strategy{
 }
 
 export {
-  WantedCompanyPageStrategy
-}
+    WantedCompanyPageStrategy
+};
