@@ -28,7 +28,14 @@ function waitUntilElementExistsByXPath(path){
 
 class Strategy{
     getCompanyName(){}
-    getCompanyInfo(){}
+    getCompanyInfo(companyName){
+      console.log(companyName);
+      return new Promise(resolve  => {
+        chrome.runtime.sendMessage({query: companyName}, function(resp){
+          resolve(resp);
+        });
+      })
+    }
     buildElement(){}
     insertElement(){}
     render(){

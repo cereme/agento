@@ -4,14 +4,6 @@ class RocketpunchCompanyPageStrategy extends Strategy{
   getCompanyName(){
     return waitUntilElementExistsBySelector("#company-name > h1").then(elem => elem.innerText);
   }
-  getCompanyInfo(companyName){
-    console.log(companyName);
-    return new Promise( resolve => {
-      chrome.runtime.sendMessage({query: companyName}, function(resp){
-        resolve(resp);
-      });
-    })
-  }
   buildElement(infoObject){
     let element = document.createElement("div");
     element.setAttribute("id", "agento-elem");

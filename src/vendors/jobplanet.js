@@ -4,14 +4,6 @@ class JobplanetCompanyPageStrategy extends Strategy{
   getCompanyName(){
     return waitUntilElementExistsBySelector("div.company_info_box > div.company_name > h1 > a").then(elem => elem.innerText);
   }
-  getCompanyInfo(companyName){
-    console.log(companyName);
-    return new Promise( resolve => {
-      chrome.runtime.sendMessage({query: companyName}, function(resp){
-        resolve(resp);
-      });
-    })
-  }
   buildElement(infoObject){
     let element = document.createElement("div");
     element.setAttribute("id", "agento-elem");

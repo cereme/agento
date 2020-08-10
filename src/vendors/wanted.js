@@ -4,14 +4,6 @@ class WantedCompanyPageStrategy extends Strategy{
   getCompanyName(){
     return waitUntilElementExistsByXPath(`//img[@alt="Company Logo"]/../h2`).then(elem => elem.innerText);
   }
-  getCompanyInfo(companyName){
-    console.log(companyName);
-    return new Promise(resolve  => {
-      chrome.runtime.sendMessage({query: companyName}, function(resp){
-        resolve(resp);
-      });
-    })
-  }
   buildElement(infoObject){
     let element = document.createElement("div");
     element.setAttribute("id", "agento-elem");
