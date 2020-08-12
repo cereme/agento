@@ -1,4 +1,4 @@
-import { Strategy, waitUntilElementExistsBySelector } from '../utils';
+import { Strategy, waitUntilElementExistsBySelector } from '../../utils';
 
 class RocketpunchCompanyPageStrategy extends Strategy{
   getCompanyName(){
