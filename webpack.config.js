@@ -60,7 +60,8 @@ let config = {
     plugins: [
         new CopyPlugin({
             patterns: [
-                { from: 'src/index.html', to: 'index.html'}
+                { from: 'src/index.html', to: 'index.html'},
+                { from: 'src/index.css', to: 'index.css'}
             ]
         })
     ],

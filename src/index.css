@@ -1,0 +1,23 @@
+.main {
+  width: 320px;
+  padding: 8px;
+}
+.main > p > strong {
+  font-size: 24px;
+}
+a {
+  text-decoration: none;
+  color: #0366d6;
+}
+.main > a.appInfo {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  display: flex; 
+  align-items: center;
+}
+a.appInfo > img {
+  margin-right: 4px;
+}
+a.appinfo > span {
+  color: #0366d6;
+}
