@@ -1,7 +1,7 @@
 {
-  "name": "agento",
+  "name": "Agento",
   "version": "0.0.1",
-  "description": "agento",
+  "description": "Agento는 산업기능/전문연구 요원 정보를 구인 사이트에서 볼 수 있게 도와주는 브라우저 확장프로그램입니다. 😎",
   "manifest_version": 2,
   "author": "cereme",
   "permissions": [
