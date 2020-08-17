@@ -33,7 +33,7 @@ class ExtensionDistBundler {
 
         archive.pipe(output);
 
-        archive.directory(`${dirName}/`, false);
+        archive.directory(`${dirName}/`, dirName);
         archive.file("manifest.json");
         console.log(`${dirName}.zip file created in root directory`);
         
@@ -61,7 +61,8 @@ let config = {
         new CopyPlugin({
             patterns: [
                 { from: 'src/index.html', to: 'index.html'},
-                { from: 'src/index.css', to: 'index.css'}
+                { from: 'src/index.css', to: 'index.css'},
+                { from: './icon128.png', to: 'icon128.png'},
             ]
         })
     ],

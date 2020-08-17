@@ -18,7 +18,7 @@
       "storage"
   ],
   "icons": {
-    "128": "icon128.png"
+    "128": "dist/icon128.png"
   },
   "background": {
     "scripts": [
