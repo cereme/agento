@@ -12,8 +12,6 @@
       "*://*.rocketpunch.com/*",
       "*://rocketpunch.com/*",
       "*://*.mma.go.kr/*",
-      "*://wtfismyip.com/*",
-      "downloads",
       "tabs",
       "storage"
   ],
