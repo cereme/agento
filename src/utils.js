@@ -11,7 +11,7 @@ function _waitUntilElementExists(evaluator){
         observer.disconnect();
       }
     });
-    observer.observe(document.body, {
+    observer.observe(document, {
       childList: true,
       subtree: true
     });
