@@ -1,3 +1,5 @@
+import browser from "webextension-polyfill";
+
 const fetchSearch = async (query) => {
   return await (await fetch("https://work.mma.go.kr/caisBYIS/search/byjjecgeomsaek.do", {
     method: "POST",
@@ -46,7 +48,7 @@ async function searchFromPortal(query){
   return resultObject;
 }
 
-chrome.runtime.onMessage.addListener(
+browser.runtime.onMessage.addListener(
   function(request, sender, sendResponse){
       searchFromPortal(request.query).then(sendResponse);
       return true;
@@ -54,10 +56,10 @@ chrome.runtime.onMessage.addListener(
 )
 
 // https://stackoverflow.com/questions/34957319/how-to-listen-for-url-change-with-chrome-extension
-chrome.runtime.onInstalled.addListener(function() {
-  chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
+browser.runtime.onInstalled.addListener(function() {
+  browser.tabs.onUpdated.addListener(function (tabId, changeInfo) {
     if (changeInfo.status === 'complete') {
-      chrome.tabs.sendMessage(tabId, {
+      browser.tabs.sendMessage(tabId, {
         message: 'TabUpdated'
       });
     }
