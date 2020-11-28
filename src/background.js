@@ -48,12 +48,9 @@ async function searchFromPortal(query){
   return resultObject;
 }
 
-browser.runtime.onMessage.addListener(
-  function(request, sender, sendResponse){
-      searchFromPortal(request.query).then(sendResponse);
-      return true;
-  }
-)
+browser.runtime.onMessage.addListener(function(request){
+  return searchFromPortal(request.query);
+})
 
 // https://stackoverflow.com/questions/34957319/how-to-listen-for-url-change-with-chrome-extension
 browser.runtime.onInstalled.addListener(function() {

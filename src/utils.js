@@ -30,13 +30,9 @@ function waitUntilElementExistsByXPath(path){
 
 class Strategy{
     getCompanyName(){}
-    getCompanyInfo(companyName){
+    async getCompanyInfo(companyName){
       console.log(companyName);
-      return new Promise(resolve  => {
-        browser.runtime.sendMessage({query: companyName}, function(resp){
-          resolve(resp);
-        });
-      })
+      return browser.runtime.sendMessage({query: companyName}); 
     }
     buildElement(){}
     insertElement(){}
