@@ -1,4 +1,5 @@
-const ChromeExtensionReloader  = require('webpack-chrome-extension-reloader');
+
+const ExtensionReloader  = require('webpack-extension-reloader');
 const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const archiver = require('archiver');
@@ -64,24 +65,21 @@ let config = {
                 { from: 'src/index.css', to: 'index.css'},
                 { from: './icon128.png', to: 'icon128.png'},
             ]
-        })
+        }),
+        new ExtensionReloader({
+            port: 9039,
+            reloadPage: true,
+            entries: {
+                contentScript: 'content-script',
+                background: 'background'
+            }
+        }) // development 모드에서만 켜짐
     ],
 };
 
 module.exports = (env, args) => {
     if(args.mode === "development"){
         config.watch = true;
-        config.plugins.push(
-            new ChromeExtensionReloader({
-                port: 9039,
-                reloadPage: true,
-                entries: {
-                    contentScript: 'content-script',
-                    background: 'background'
-                }
-            })
-        );
-
     }
 
     if(args.mode === "production"){
