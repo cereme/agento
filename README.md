@@ -20,6 +20,21 @@ Agento는 산업기능/전문연구 요원 정보를 채용 사이트에서 볼 
  * 로켓펀치(https://www.rocketpunch.com)
  * 원티드(https://www.wanted.co.kr)
 
+## How to build
+### Recommended system
+ * Node v14
+ * npm v6.14
+### Build Step
+ * Install requirements
+   ```
+   npm install
+   ```
+ * Run build command
+   ```
+   npm run build
+   ```
+   then you can get agento.bundle.zip
+
  ## Contact
  
  email: ceremebsy@gmail.com
