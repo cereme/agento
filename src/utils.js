@@ -1,3 +1,5 @@
+import browser from 'webextension-polyfill';
+
 function getElementByXpath(path) {
   return document.evaluate(path, document.body, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 }
@@ -28,13 +30,9 @@ function waitUntilElementExistsByXPath(path){
 
 class Strategy{
     getCompanyName(){}
-    getCompanyInfo(companyName){
+    async getCompanyInfo(companyName){
       console.log(companyName);
-      return new Promise(resolve  => {
-        chrome.runtime.sendMessage({query: companyName}, function(resp){
-          resolve(resp);
-        });
-      })
+      return browser.runtime.sendMessage({query: companyName}); 
     }
     buildElement(){}
     insertElement(){}
