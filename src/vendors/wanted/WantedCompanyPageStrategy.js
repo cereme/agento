@@ -39,7 +39,9 @@ class WantedCompanyPageStrategy extends Strategy{
 
     const buildEmptyInfoArea = (infoArea) => {
       let notice = document.createElement("p");
-      notice.innerText = "검색 결과가 없습니다 :(";
+      notice.style.wordBreak = "keep-all";
+      notice.style.marginTop = "1rem;";
+      notice.innerText = "검색 결과가 없습니다 :(\n사이트에 등록된 회사 이름에 따라 다를 수 있으므로 정확한 내용은 산업지원병역일터를 참고해주세요.";
       infoArea.appendChild(notice);
       return infoArea;
     }
