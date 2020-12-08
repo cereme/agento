@@ -31,14 +31,31 @@ class RocketpunchPositionPageStrategy extends Strategy{
         row.style.lineHeight = "2";
         let keyElem = document.createElement("th");
         keyElem.style.paddingRight = "16px";
-        let valueElem = document.createElement("td");
-        valueElem.style.fontSize = "20px";
+        let valueElem;
+        if(key === "회사명"){
+          valueElem = document.createElement("a");
+          valueElem.classList.add("primary", "link");
+          valueElem.style.fontSize = "16px";
+          valueElem.style.fontWeight = "bold";
+          valueElem.href = infoObject.detailPageUrl;
+          valueElem.target = "_blank";
+        }else{
+          valueElem = document.createElement("span");
+          valueElem.style.fontSize = "16px";
+          valueElem.style.fontWeight = "bold";
+        }
         keyElem.innerText = key;
         valueElem.innerText = infoObject[key];
         row.append(keyElem);
         row.append(valueElem);
         infoArea.appendChild(row);
       }
+      let warningArea = document.createElement("small");
+      const query = decodeURI(infoObject.searchQuery);
+      warningArea.style.marginTop = "0.5rem";
+      warningArea.style.wordBreak = "keep-all";
+      warningArea.innerText = `${query} 검색어로 산업지원병역일터에서 검색한 결과입니다. 검색 결과가 부정확할 수 있으므로 회사이름을 클릭해 산업지원병역일터 페이지를 확인해주세요.`;
+      infoArea.appendChild(warningArea);
       return infoArea;
     }
 

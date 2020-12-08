@@ -39,6 +39,12 @@ class JobplanetCompanyPageStrategy extends Strategy{
         row.append(valueElem);
         infoArea.appendChild(row);
       }
+      let warningArea = document.createElement("small");
+      const query = decodeURI(infoObject.searchQuery);
+      warningArea.style.marginTop = "0.5rem";
+      warningArea.style.wordBreak = "keep-all";
+      warningArea.innerText = `${query} 검색어로 산업지원병역일터에서 검색한 결과입니다. 검색 결과가 부정확할 수 있으므로 회사이름을 클릭해 산업지원병역일터 페이지를 확인해주세요.`;
+      infoArea.appendChild(warningArea);
       return infoArea;
     }
 

@@ -36,11 +36,14 @@ async function searchFromPortal(query){
   let linkToDetailPage = searchResultElem.getAttribute("href");
   let companyName = searchResultElem.innerText;
 
-  let detailPageResult = await (await fetch(`https://work.mma.go.kr${linkToDetailPage}`)).text();
+  const detailPageUrl = `https://work.mma.go.kr${linkToDetailPage}`;
+  let detailPageResult = await (await fetch(detailPageUrl)).text();
   htmlDoc = parser.parseFromString(detailPageResult, 'text/html');
 
   let resultObject = parseDetailPage(htmlDoc);
   resultObject["회사명"] = companyName;
+  resultObject.detailPageUrl = detailPageUrl;
+  resultObject.searchQuery = query;
 
   delete resultObject["주생산물"];
   delete resultObject["연구분야"];

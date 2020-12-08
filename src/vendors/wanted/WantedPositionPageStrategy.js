@@ -30,7 +30,21 @@ class WantedPositionPageStrategy extends Strategy{
           let valueElem = document.createElement("td");
           valueElem.style.fontSize = "20px";
           keyElem.innerText = key;
-          valueElem.innerText = infoObject[key];
+          let valueInnerElem;
+          if(key === "회사명"){
+            valueInnerElem = document.createElement("a");
+            valueInnerElem.style.fontSize = "16px";
+            valueInnerElem.style.fontWeight = "bold";
+            valueInnerElem.style.color = "#258bf7";
+            valueInnerElem.href = infoObject.detailPageUrl;
+            valueInnerElem.target = "_blank";
+          }else{
+            valueInnerElem = document.createElement("span");
+            valueInnerElem.style.fontSize = "16px";
+            valueInnerElem.style.fontWeight = "bold";
+          }
+          valueInnerElem.innerText = infoObject[key];
+          valueElem.appendChild(valueInnerElem);
           row.append(keyElem);
           row.append(valueElem);
           infoArea.appendChild(row);
@@ -50,6 +64,13 @@ class WantedPositionPageStrategy extends Strategy{
       let infoAreaBuilder = Object.keys(infoObject).length === 0 ? buildEmptyInfoArea : buildFilledInfoArea;
   
       element.appendChild(infoAreaBuilder(infoArea));
+
+      let warningArea = document.createElement("small");
+      const query = decodeURI(infoObject.searchQuery);
+      warningArea.style.marginTop = "0.5rem";
+      warningArea.style.wordBreak = "keep-all";
+      warningArea.innerText = `${query} 검색어로 산업지원병역일터에서 검색한 결과입니다. 검색 결과가 부정확할 수 있으므로 회사이름을 클릭해 산업지원병역일터 페이지를 확인해주세요.`;
+      element.appendChild(warningArea);
   
       return element;
     }
