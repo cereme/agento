@@ -51,13 +51,13 @@ async function searchFromPortal(query){
   return resultObject;
 }
 
-browser.runtime.onMessage.addListener(function(request){
+browser.runtime.onMessage.addListener((request)=> {
   return searchFromPortal(request.query);
 })
 
 // https://stackoverflow.com/questions/34957319/how-to-listen-for-url-change-with-chrome-extension
-browser.runtime.onInstalled.addListener(function() {
-  browser.tabs.onUpdated.addListener(function (tabId, changeInfo) {
+browser.runtime.onInstalled.addListener(() => {
+  browser.tabs.onUpdated.addListener((tabId, changeInfo) => {
     if (changeInfo.status === 'complete') {
       browser.tabs.sendMessage(tabId, {
         message: 'TabUpdated'
