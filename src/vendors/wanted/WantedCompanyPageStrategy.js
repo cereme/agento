@@ -17,7 +17,8 @@ class WantedCompanyPageStrategy extends Strategy{
 
     let pageContainer = getElementByXpath(`//h3[.='태그']/..`);
     pageContainer.insertAdjacentElement('afterbegin', agentoContainer);
-    render(<WantedAgentoElement infoObject={infoObject} />, pageContainer);  }
+    render(<WantedAgentoElement infoObject={infoObject} />, agentoContainer);  
+  }
 }
 
 export {

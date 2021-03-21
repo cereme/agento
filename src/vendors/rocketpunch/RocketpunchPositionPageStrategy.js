@@ -17,7 +17,7 @@ class RocketpunchPositionPageStrategy extends Strategy{
 
     let pageContainer = document.querySelector("div.ui.celled.grid");
     pageContainer.insertAdjacentElement('afterbegin', agentoContainer);
-    render(<RocketpunchAgentoElement infoObject={infoObject} />, pageContainer);
+    render(<RocketpunchAgentoElement infoObject={infoObject} />, agentoContainer);
   }
 }
 

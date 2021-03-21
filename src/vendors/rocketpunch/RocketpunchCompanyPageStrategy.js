@@ -17,7 +17,7 @@ class RocketpunchCompanyPageStrategy extends Strategy{
 
     let pageContainer = document.querySelector("div.company-main");
     pageContainer.insertAdjacentElement('afterbegin', agentoContainer);
-    render(<RocketpunchAgentoElement infoObject={infoObject} isWideView />, pageContainer);
+    render(<RocketpunchAgentoElement infoObject={infoObject} isWideView />, agentoContainer);
   }
 }
 

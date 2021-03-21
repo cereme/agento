@@ -16,7 +16,7 @@ class WantedPositionPageStrategy extends Strategy{
       
       let pageContainer = getElementByXpath(`//*[@id="__next"]/div/div[3]/div[1]/div[1]/aside`);
       pageContainer.insertAdjacentElement('afterbegin', agentoContainer);
-      render(<WantedAgentoElement infoObject={infoObject} />, pageContainer);
+      render(<WantedAgentoElement infoObject={infoObject} />, agentoContainer);
     }
   }
 

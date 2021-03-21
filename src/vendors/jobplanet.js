@@ -74,7 +74,7 @@ class JobplanetCompanyPageStrategy extends Strategy{
     let pageContainer = document.getElementById("sideContents");
     pageContainer.insertAdjacentElement('afterbegin', agentoContainer);
     const Elem = this.buildPreactElement();
-    render(<Elem infoObject={infoObject} />, pageContainer);
+    render(<Elem infoObject={infoObject} />, agentoContainer);
   }
 }
 
