@@ -64,14 +64,9 @@ class JobplanetCompanyPageStrategy extends Strategy{
     return AgentoPreactElement;
   }
   insertElement(infoObject){
-    let agentoContainer = document.getElementById("agento-container");
-    if(agentoContainer){
-      agentoContainer.remove();
-    }
-    agentoContainer = document.createElement("div");
-    agentoContainer.setAttribute("id", "agento-container");
+    const agentoContainer = this.createFreshAgentoContainer();
 
-    let pageContainer = document.getElementById("sideContents");
+    const pageContainer = document.getElementById("sideContents");
     pageContainer.insertAdjacentElement('afterbegin', agentoContainer);
     const Elem = this.buildPreactElement();
     render(<Elem infoObject={infoObject} />, agentoContainer);

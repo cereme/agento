@@ -8,14 +8,9 @@ class RocketpunchCompanyPageStrategy extends Strategy{
     return waitUntilElementExistsBySelector("#company-name > h1").then(elem => elem.innerText);
   }
   insertElement(infoObject){
-    let agentoContainer = document.getElementById("agento-container");
-    if(agentoContainer){
-      agentoContainer.remove();
-    }
-    agentoContainer = document.createElement("div");
-    agentoContainer.setAttribute("id", "agento-container");
+    const agentoContainer = this.createFreshAgentoContainer();
 
-    let pageContainer = document.querySelector("div.company-main");
+    const pageContainer = document.querySelector("div.company-main");
     pageContainer.insertAdjacentElement('afterbegin', agentoContainer);
     render(<RocketpunchAgentoElement infoObject={infoObject} isWideView />, agentoContainer);
   }

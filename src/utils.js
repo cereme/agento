@@ -34,6 +34,15 @@ class Strategy{
       console.log(companyName);
       return browser.runtime.sendMessage({query: companyName}); 
     }
+    createFreshAgentoContainer() {
+      let agentoContainer = document.getElementById("agento-container");
+      if(agentoContainer){
+        agentoContainer.remove();
+      }
+      agentoContainer = document.createElement("div");
+      agentoContainer.setAttribute("id", "agento-container");
+      return agentoContainer;
+    }
     buildElement(){}
     insertElement(){}
     render(){

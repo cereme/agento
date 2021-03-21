@@ -7,14 +7,9 @@ class WantedPositionPageStrategy extends Strategy{
       return waitUntilElementExistsByXPath(`*[@id="__next"]/div/div[3]/div[1]/div[1]/div/section[2]/div[1]/h6/a`).then(elem => elem.innerText);
     }
     insertElement(infoObject){
-      let agentoContainer = document.getElementById("agento-container");
-      if(agentoContainer){
-        agentoContainer.remove();
-      }
-      agentoContainer = document.createElement("div");
-      agentoContainer.setAttribute("id", "agento-container");
+      const agentoContainer = this.createFreshAgentoContainer();
       
-      let pageContainer = getElementByXpath(`//*[@id="__next"]/div/div[3]/div[1]/div[1]/aside`);
+      const pageContainer = getElementByXpath(`//*[@id="__next"]/div/div[3]/div[1]/div[1]/aside`);
       pageContainer.insertAdjacentElement('afterbegin', agentoContainer);
       render(<WantedAgentoElement infoObject={infoObject} />, agentoContainer);
     }

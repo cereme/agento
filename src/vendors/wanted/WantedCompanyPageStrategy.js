@@ -8,14 +8,9 @@ class WantedCompanyPageStrategy extends Strategy{
     return waitUntilElementExistsByXPath(`//img[@alt="Company Logo"]/../h2`).then(elem => elem.innerText);
   }
   insertElement(infoObject){
-    let agentoContainer = document.getElementById("agento-container");
-    if(agentoContainer){
-      agentoContainer.remove();
-    }
-    agentoContainer = document.createElement("div");
-    agentoContainer.setAttribute("id", "agento-container");
+    const agentoContainer = this.createFreshAgentoContainer();
 
-    let pageContainer = getElementByXpath(`//h3[.='태그']/..`);
+    const pageContainer = getElementByXpath(`//h3[.='태그']/..`);
     pageContainer.insertAdjacentElement('afterbegin', agentoContainer);
     render(<WantedAgentoElement infoObject={infoObject} />, agentoContainer);  
   }

@@ -8,14 +8,9 @@ class RocketpunchPositionPageStrategy extends Strategy{
     return waitUntilElementExistsByXPath(`//a[@href="#additional-info"]`).then(elem => elem.innerText.match(/(.*?)에서 요청하는 자료/)[1]);
   }
   insertElement(infoObject){
-    let agentoContainer = document.getElementById("agento-container");
-    if(agentoContainer){
-      agentoContainer.remove();
-    }
-    agentoContainer = document.createElement("div");
-    agentoContainer.setAttribute("id", "agento-container");
+    const agentoContainer = this.createFreshAgentoContainer();
 
-    let pageContainer = document.querySelector("div.ui.celled.grid");
+    const pageContainer = document.querySelector("div.ui.celled.grid");
     pageContainer.insertAdjacentElement('afterbegin', agentoContainer);
     render(<RocketpunchAgentoElement infoObject={infoObject} />, agentoContainer);
   }
