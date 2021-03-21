@@ -44,7 +44,7 @@ export default function RocketpunchAgentoElement({infoObject, styledElem, classN
     }
   `)
   return (
-    <AgentoElem className={`ui ${isWideView ? "segment" : ""} text vertically divided container ${className}`}>
+    <AgentoElem className={`ui ${isWideView ? "segment container" : ""} text vertically divided ${className}`}>
       <h3>병역정보</h3>
       <ul>
         { Object.keys(infoObject).length === 0 &&
