@@ -1,74 +1,80 @@
+/** @jsx h */
+import { h, render } from 'preact'
 import { Strategy, waitUntilElementExistsBySelector } from '../utils';
-
+import styled from "preact-css-styled";
 class JobplanetCompanyPageStrategy extends Strategy{
   getCompanyName(){
     return waitUntilElementExistsBySelector("div.company_info_box > div.company_name > h1 > a").then(elem => elem.innerText);
   }
-  buildElement(infoObject){
-    let element = document.createElement("div");
-    element.setAttribute("id", "agento-elem");
-    element.setAttribute("class", "job_join_banner");
-    element.style.backgroundColor = "#fff";
-    element.style.padding = "20px";
-
-    let title = document.createElement("h3");
-    title.style.fontSize = "16px";
-    title.style.lineHeight = "26px";
-    title.style.marginBottom = "8px";
-    title.style.color = "#323438";
-    title.innerText = "병역정보";
-    element.appendChild(title);
-
-    let infoArea = document.createElement("table");
-    infoArea.style.paddingLeft = "5px";
-    infoArea.style.borderSpacing = "8px";
-    infoArea.style.borderCollapse = "collapse";
-
-    const buildFilledInfoArea = (infoArea) => {
-      const infoKeys = ["회사명", "업종", "기업규모", "현역배정인원", "현역편입인원", "현역복무인원", "보충역배정인원", "보충역편입인원", "보충역복무인원"];
-      for(let key of infoKeys){
-        let row = document.createElement("tr");
-        row.style.lineHeight = "2";
-        let keyElem = document.createElement("th");
-        keyElem.style.paddingRight = "16px";
-        let valueElem = document.createElement("td");
-        valueElem.style.fontSize = "20px";
-        keyElem.innerText = key;
-        valueElem.innerText = infoObject[key];
-        row.append(keyElem);
-        row.append(valueElem);
-        infoArea.appendChild(row);
+  buildPreactElement() {
+    const infoKeys = ["회사명", "업종", "기업규모", "현역배정인원", "현역편입인원", "현역복무인원", "보충역배정인원", "보충역편입인원", "보충역복무인원"];
+    const AgentoElem = styled("div", `
+      {
+        background-color: #ffffff;
+        padding: 20px;
+        word-break: keep-all;
+        white-space: pre-line;
       }
-      let warningArea = document.createElement("small");
-      const query = decodeURI(infoObject.searchQuery);
-      warningArea.style.marginTop = "0.5rem";
-      warningArea.style.wordBreak = "keep-all";
-      warningArea.innerText = `${query} 검색어로 산업지원병역일터에서 검색한 결과입니다. 검색 결과가 부정확할 수 있으므로 회사이름을 클릭해 산업지원병역일터 페이지를 확인해주세요.`;
-      infoArea.appendChild(warningArea);
-      return infoArea;
+      > h3 {
+        font-size: larger;
+        margin-bottom: 0.5rem;
+      }
+      table {
+        padding-left: 4px;
+        border-spacing: 8px;
+        border-collapse: collapse;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+      tr {
+        line-height: 2;
+      } 
+      th {
+        padding-right: 1rem;
+      }
+      td {
+        font-size: larger;
+      }
+    `);
+    const AgentoPreactElement = ({infoObject}) => {
+      return (
+        <AgentoElem id="agento-elem" className="job_join_banner">
+          <h3>
+            병역정보
+          </h3>
+          <table>
+            { Object.keys(infoObject).length === 0 &&
+              <p>{`검색 결과가 없습니다 :(\n사이트에 등록된 회사 이름에 따라 다를 수 있으므로 정확한 내용은 산업지원병역일터를 참고해주세요.`}</p>
+            }
+            { Object.keys(infoObject).length > 0 &&
+              infoKeys.map((key) => (
+                <tr>
+                  <th>{key}</th>
+                  <td>{infoObject[key]}</td>
+                </tr>
+              ))
+            }
+          </table>
+          <small>
+            {`${decodeURI(infoObject.searchQuery)} 검색어로 산업지원병역일터에서 검색한 결과입니다. 검색 결과가 부정확할 수 있으므로 회사이름을 클릭해 산업지원병역일터 페이지를 확인해주세요.`}
+          </small>
+        </AgentoElem>
+      )
     }
-
-    const buildEmptyInfoArea = (infoArea) => {
-      let notice = document.createElement("p");
-      notice.style.wordBreak = "keep-all";
-      notice.style.marginTop = "1rem;";
-      notice.innerText = "검색 결과가 없습니다 :(\n사이트에 등록된 회사 이름에 따라 다를 수 있으므로 정확한 내용은 산업지원병역일터를 참고해주세요.";
-      infoArea.appendChild(notice);
-      return infoArea;
-    }
-
-    let infoAreaBuilder = Object.keys(infoObject).length === 0 ? buildEmptyInfoArea : buildFilledInfoArea;
-
-    element.appendChild(infoAreaBuilder(infoArea));
-    return element;
+    return AgentoPreactElement;
   }
-  insertElement(element){
-    let agentoElement = document.getElementById("agento-elem");
-    if(agentoElement){
-      agentoElement.remove();
+  insertElement(infoObject){
+    let agentoContainer = document.getElementById("agento-container");
+    if(agentoContainer){
+      agentoContainer.remove();
     }
-    let container = document.getElementById("sideContents");
-    container.insertAdjacentElement('afterbegin', element);
+    agentoContainer = document.createElement("div");
+    agentoContainer.setAttribute("id", "agento-container");
+
+    let pageContainer = document.getElementById("sideContents");
+    pageContainer.insertAdjacentElement('afterbegin', agentoContainer);
+    const Elem = this.buildPreactElement();
+    render(<Elem infoObject={infoObject} />, pageContainer);
   }
 }
 

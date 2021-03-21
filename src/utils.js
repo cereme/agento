@@ -44,7 +44,7 @@ class Strategy{
           infoObject = await this.getCompanyInfo(companyName.replace(/\(.*?\)/g, ""));
         }
         let agentoElement = this.buildElement(infoObject);
-        this.insertElement(agentoElement);
+        this.insertElement(infoObject);
       })();
     }
 }
