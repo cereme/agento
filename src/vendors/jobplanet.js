@@ -50,7 +50,13 @@ class JobplanetCompanyPageStrategy extends Strategy{
               infoKeys.map((key) => (
                 <tr>
                   <th>{key}</th>
-                  <td>{infoObject[key]}</td>
+                  <td>
+                    {key === "회사명" ? 
+                    <a href={infoObject.detailPageUrl} target="_blank" rel="noreferrer">
+                      {infoObject[key]}
+                    </a> 
+                    : <span>{infoObject[key]}</span>}
+                    </td>
                 </tr>
               ))
             }
