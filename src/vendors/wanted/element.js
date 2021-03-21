@@ -2,7 +2,7 @@
 import { h } from 'preact'
 import styled from "preact-css-styled";
 
-export default function WantedAgentoElement({infoObject, styledElement}) {
+export default function WantedAgentoElement({infoObject, styledElement, className}) {
   const infoKeys = ["회사명", "업종", "기업규모", "현역배정인원", "현역편입인원", "현역복무인원", "보충역배정인원", "보충역편입인원", "보충역복무인원"];
   const AgentoElem = styledElement || styled("div", `
     {
@@ -30,7 +30,7 @@ export default function WantedAgentoElement({infoObject, styledElement}) {
     }
   `);
   return (
-    <AgentoElem>
+    <AgentoElem id="agento-elem" className={className}>
       <h3>병역정보</h3>
       <table>
         { Object.keys(infoObject).length === 0 &&
