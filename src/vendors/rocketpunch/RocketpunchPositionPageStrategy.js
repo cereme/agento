@@ -1,7 +1,8 @@
 /** @jsx h */
 import { h, render } from 'preact'
-import { Strategy, waitUntilElementExistsByXPath } from '../../utils';
+import { waitUntilElementExistsByXPath } from '../../utils';
 import RocketpunchAgentoElement from './element';
+import Strategy from '../../strategy';
 
 class RocketpunchPositionPageStrategy extends Strategy{
   getCompanyName(){

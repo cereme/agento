@@ -1,7 +1,9 @@
 /** @jsx h */
 import { h, render } from 'preact'
-import { Strategy, waitUntilElementExistsByXPath, getElementByXpath } from '../../utils';
+import { waitUntilElementExistsByXPath, getElementByXpath } from '../../utils';
 import WantedAgentoElement from './element';
+import Strategy from '../../strategy';
+
 class WantedPositionPageStrategy extends Strategy{
     getCompanyName(){
       return waitUntilElementExistsByXPath(`*[@id="__next"]/div/div[3]/div[1]/div[1]/div/section[2]/div[1]/h6/a`).then(elem => elem.innerText);

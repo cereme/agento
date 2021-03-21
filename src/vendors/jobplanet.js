@@ -1,7 +1,8 @@
 /** @jsx h */
 import { h, render } from 'preact'
-import { Strategy, waitUntilElementExistsBySelector } from '../utils';
+import { waitUntilElementExistsBySelector } from '../utils';
 import styled from "preact-css-styled";
+import Strategy from '../strategy';
 class JobplanetCompanyPageStrategy extends Strategy{
   getCompanyName(){
     return waitUntilElementExistsBySelector("div.company_info_box > div.company_name > h1 > a").then(elem => elem.innerText);

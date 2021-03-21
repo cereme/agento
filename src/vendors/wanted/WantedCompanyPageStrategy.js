@@ -1,8 +1,8 @@
 /** @jsx h */
 import { h, render } from 'preact'
-import { Strategy, waitUntilElementExistsByXPath, getElementByXpath } from '../../utils';
+import { waitUntilElementExistsByXPath, getElementByXpath } from '../../utils';
 import WantedAgentoElement from './element';
-
+import Strategy from '../../strategy';
 class WantedCompanyPageStrategy extends Strategy{
   getCompanyName(){
     return waitUntilElementExistsByXPath(`//img[@alt="Company Logo"]/../h2`).then(elem => elem.innerText);
