@@ -3,8 +3,10 @@ Agento는 산업기능/전문연구 요원 정보를 채용 사이트에서 볼 
 
 ## 다운로드
 
+![Chrome webstore version](https://img.shields.io/chrome-web-store/v/ifnibakljlmafjjcbekkmjghggcjkckm)
 [Download with Chrome webstore](https://chrome.google.com/webstore/detail/agento/ifnibakljlmafjjcbekkmjghggcjkckm?hl=ko&authuser=0)
 
+![Firefox Add-Ons version](https://img.shields.io/amo/v/agento)
 [Download with Firefox Add-Ons](https://addons.mozilla.org/ko/firefox/addon/agento/)
 
 ## Gallery
