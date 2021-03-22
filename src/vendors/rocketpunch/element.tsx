@@ -1,13 +1,19 @@
 /** @jsx h */
 import { h } from 'preact';
 import styled from 'preact-css-styled';
+import AgentoInfo from '../../domain';
+
+interface RocketpunchAgentoElementProps {
+  infoObject: AgentoInfo;
+  className?: string;
+  isWideView?: boolean;
+}
 
 export default function RocketpunchAgentoElement({
   infoObject,
-  styledElem,
   className,
-  isWideView,
-}) {
+  isWideView = false,
+}: RocketpunchAgentoElementProps): h.JSX.Element {
   const infoKeys = [
     '회사명',
     '업종',
@@ -20,7 +26,7 @@ export default function RocketpunchAgentoElement({
     '보충역복무인원',
   ];
   // prettier-ignore
-  const AgentoElem = styledElem || styled("div", `
+  const AgentoElem = styled("div", `
     {
       padding: 24px !important;
     }
@@ -60,9 +66,7 @@ export default function RocketpunchAgentoElement({
     }
   `)
   return (
-    <AgentoElem
-      className={`ui ${isWideView ? 'segment container' : ''} text vertically divided ${className}`}
-    >
+    <AgentoElem className={`ui ${isWideView ? 'segment container' : ''} text vertically divided ${className}`}>
       <h3>병역정보</h3>
       <ul>
         {Object.keys(infoObject).length === 0 && (

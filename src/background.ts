@@ -1,6 +1,7 @@
 import browser from 'webextension-polyfill';
+import AgentoInfo from './domain';
 
-const fetchSearch = async (query) => {
+async function fetchSearch(query: string) {
   return await (
     await fetch('https://work.mma.go.kr/caisBYIS/search/byjjecgeomsaek.do', {
       method: 'POST',
@@ -11,46 +12,46 @@ const fetchSearch = async (query) => {
       body: `al_eopjong_gbcd=&eopjong_gbcd_list=&eopjong_gbcd=1&gegyumo_cd=&eopche_nm=${query}&sido_addr=&sigungu_addr=`,
     })
   ).text();
-};
+}
 
-const parseDetailPage = (htmlDoc) => {
-  let tbody = htmlDoc.querySelector('#content > div:nth-child(2) > table > tbody');
-  let resultObject = {};
-  for (let tr of tbody.querySelectorAll('tr')) {
-    let ths = tr.querySelectorAll('th');
-    let tds = tr.querySelectorAll('td');
+function parseDetailPage(htmlDoc: Document) {
+  const tbody = htmlDoc.querySelector('#content > div:nth-child(2) > table > tbody');
+  const resultObject = {};
+  for (const tr of tbody.querySelectorAll('tr')) {
+    const ths = tr.querySelectorAll('th');
+    const tds = tr.querySelectorAll('td');
     resultObject[ths[0].innerText] = tds[0].innerText;
     resultObject[ths[1].innerText] = tds[1].innerText;
   }
   return resultObject;
-};
+}
 
-async function searchFromPortal(query) {
+async function searchFromPortal(query: string): Promise<AgentoInfo> {
   query = encodeURI(query);
-  let searchResult = await fetchSearch(query);
-  let parser = new DOMParser();
+  const searchResult = await fetchSearch(query);
+  const parser = new DOMParser();
 
   let htmlDoc = parser.parseFromString(searchResult, 'text/html');
-  let searchResultElem = htmlDoc.querySelector('#content > table > tbody > tr > th > a');
+  const searchResultElem = htmlDoc.querySelector('#content > table > tbody > tr > th > a') as HTMLElement;
   if (!searchResultElem) {
-    return {};
+    throw new Error('No search result');
   }
-  let linkToDetailPage = searchResultElem.getAttribute('href');
-  let companyName = searchResultElem.innerText;
+  const linkToDetailPage = searchResultElem.getAttribute('href');
+  const companyName = searchResultElem.innerText;
 
   const detailPageUrl = `https://work.mma.go.kr${linkToDetailPage}`;
-  let detailPageResult = await (await fetch(detailPageUrl)).text();
+  const detailPageResult = await (await fetch(detailPageUrl)).text();
   htmlDoc = parser.parseFromString(detailPageResult, 'text/html');
 
-  let resultObject = parseDetailPage(htmlDoc);
+  const resultObject = parseDetailPage(htmlDoc);
   resultObject['회사명'] = companyName;
-  resultObject.detailPageUrl = detailPageUrl;
-  resultObject.searchQuery = query;
+  resultObject['detailPageUrl'] = detailPageUrl;
+  resultObject['searchQuery'] = query;
 
   delete resultObject['주생산물'];
   delete resultObject['연구분야'];
 
-  return resultObject;
+  return resultObject as AgentoInfo;
 }
 
 browser.runtime.onMessage.addListener((request) => {

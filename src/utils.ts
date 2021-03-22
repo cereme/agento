@@ -1,12 +1,12 @@
-function getElementByXpath(path) {
+function getElementByXpath(path: string): HTMLElement {
   return document.evaluate(path, document.body, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
-    .singleNodeValue;
+    .singleNodeValue as HTMLElement;
 }
 
-function _waitUntilElementExists(evaluator) {
+function _waitUntilElementExists(evaluator: () => HTMLElement): Promise<HTMLElement> {
   return new Promise((resolve) => {
-    let observer = new MutationObserver(() => {
-      let evaluated = evaluator();
+    const observer = new MutationObserver(() => {
+      const evaluated = evaluator();
       if (evaluated) {
         resolve(evaluated);
         observer.disconnect();
@@ -19,11 +19,11 @@ function _waitUntilElementExists(evaluator) {
   });
 }
 
-function waitUntilElementExistsBySelector(query) {
+function waitUntilElementExistsBySelector(query: string): Promise<HTMLElement> {
   return _waitUntilElementExists(() => document.querySelector(query));
 }
 
-function waitUntilElementExistsByXPath(path) {
+function waitUntilElementExistsByXPath(path: string): Promise<HTMLElement> {
   return _waitUntilElementExists(() => getElementByXpath(path));
 }
 

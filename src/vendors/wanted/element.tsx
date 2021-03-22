@@ -1,8 +1,14 @@
 /** @jsx h */
 import { h } from 'preact';
 import styled from 'preact-css-styled';
+import AgentoInfo from '../../domain';
 
-export default function WantedAgentoElement({ infoObject, styledElement, className }) {
+interface WantedAgentoElementProps {
+  infoObject: AgentoInfo;
+  className?: string;
+}
+
+export default function WantedAgentoElement({ infoObject, className }: WantedAgentoElementProps): h.JSX.Element {
   const infoKeys = [
     '회사명',
     '업종',
@@ -14,11 +20,9 @@ export default function WantedAgentoElement({ infoObject, styledElement, classNa
     '보충역편입인원',
     '보충역복무인원',
   ];
-  const AgentoElem =
-    styledElement ||
-    styled(
-      'div',
-      `
+  const AgentoElem = styled(
+    'div',
+    `
     {
       margin-bottom: 20px;
       border: 1px solid #e1e2e3;
@@ -43,7 +47,7 @@ export default function WantedAgentoElement({ infoObject, styledElement, classNa
       color: #258bf7;
     }
   `
-    );
+  );
   return (
     <AgentoElem id="agento-elem" className={className}>
       <h3>병역정보</h3>

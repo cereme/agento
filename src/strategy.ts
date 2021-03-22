@@ -1,12 +1,15 @@
 import browser from 'webextension-polyfill';
+import AgentoInfo from './domain';
 
-class Strategy {
-  getCompanyName() {}
-  async getCompanyInfo(companyName) {
-    console.log(companyName);
+abstract class Strategy {
+  abstract getCompanyName(): Promise<string>;
+  abstract insertElement(infoObject: AgentoInfo): void;
+
+  async getCompanyInfo(companyName: string): Promise<AgentoInfo> {
     return browser.runtime.sendMessage({ query: companyName });
   }
-  createFreshAgentoContainer() {
+
+  createFreshAgentoContainer(): HTMLElement {
     let agentoContainer = document.getElementById('agento-container');
     if (agentoContainer) {
       agentoContainer.remove();
@@ -15,11 +18,10 @@ class Strategy {
     agentoContainer.setAttribute('id', 'agento-container');
     return agentoContainer;
   }
-  buildElement() {}
-  insertElement() {}
-  render() {
+
+  render(): void {
     (async () => {
-      let companyName = await this.getCompanyName();
+      const companyName = await this.getCompanyName();
       let infoObject = await this.getCompanyInfo(companyName);
       if (Object.keys(infoObject).length === 0) {
         infoObject = await this.getCompanyInfo(companyName.replace(/\(.*?\)/g, ''));

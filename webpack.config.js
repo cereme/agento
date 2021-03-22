@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const ExtensionReloader = require('webpack-extension-reloader');
 const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
@@ -43,16 +44,23 @@ class ExtensionDistBundler {
 
 let config = {
   entry: {
-    'content-script': './src/inject.js',
-    background: './src/background.js',
+    'content-script': './src/inject.ts',
+    background: './src/background.ts',
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         use: 'babel-loader',
       },
+      {
+        test: /\.(ts|tsx)$/,
+        use: 'ts-loader',
+      },
     ],
+  },
+  resolve: {
+    extensions: ['.ts', '.js', '.tsx', 'jsx'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

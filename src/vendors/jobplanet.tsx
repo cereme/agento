@@ -4,10 +4,10 @@ import { waitUntilElementExistsBySelector } from '../utils';
 import styled from 'preact-css-styled';
 import Strategy from '../strategy';
 class JobplanetCompanyPageStrategy extends Strategy {
-  getCompanyName() {
-    return waitUntilElementExistsBySelector(
-      'div.company_info_box > div.company_name > h1 > a'
-    ).then((elem) => elem.innerText);
+  getCompanyName(): Promise<string> {
+    return waitUntilElementExistsBySelector('div.company_info_box > div.company_name > h1 > a').then(
+      (elem) => (elem as HTMLElement).innerText
+    );
   }
   buildPreactElement() {
     const infoKeys = [
