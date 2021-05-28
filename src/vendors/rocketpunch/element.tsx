@@ -4,7 +4,7 @@ import styled from 'preact-css-styled';
 import AgentoInfo from '../../domain';
 
 interface RocketpunchAgentoElementProps {
-  infoObject: AgentoInfo;
+  infoObject?: AgentoInfo;
   className?: string;
   isWideView?: boolean;
 }
@@ -69,10 +69,10 @@ export default function RocketpunchAgentoElement({
     <AgentoElem className={`ui ${isWideView ? 'segment container' : ''} text vertically divided ${className}`}>
       <h3>병역정보</h3>
       <ul>
-        {Object.keys(infoObject).length === 0 && (
+        {!infoObject && (
           <p>{`검색 결과가 없습니다 :(\n사이트에 등록된 회사 이름에 따라 다를 수 있으므로 정확한 내용은 산업지원병역일터를 참고해주세요.`}</p>
         )}
-        {Object.keys(infoObject).length > 0 &&
+        {infoObject &&
           infoKeys.map((key) => (
             <li>
               <span>{key}</span>
@@ -89,9 +89,10 @@ export default function RocketpunchAgentoElement({
           ))}
       </ul>
       <small>
-        {`${decodeURI(
-          infoObject.searchQuery
-        )} 검색어로 산업지원병역일터에서 검색한 결과입니다. 검색 결과가 부정확할 수 있으므로 회사이름을 클릭해 산업지원병역일터 페이지를 확인해주세요.`}
+        {infoObject &&
+          `${decodeURI(
+            infoObject.searchQuery
+          )} 검색어로 산업지원병역일터에서 검색한 결과입니다. 검색 결과가 부정확할 수 있으므로 회사이름을 클릭해 산업지원병역일터 페이지를 확인해주세요.`}
       </small>
     </AgentoElem>
   );

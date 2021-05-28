@@ -23,7 +23,7 @@ abstract class Strategy {
     (async () => {
       const companyName = await this.getCompanyName();
       let infoObject = await this.getCompanyInfo(companyName);
-      if (Object.keys(infoObject).length === 0) {
+      if (!infoObject) {
         infoObject = await this.getCompanyInfo(companyName.replace(/\(.*?\)/g, ''));
       }
       this.insertElement(infoObject);

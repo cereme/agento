@@ -54,8 +54,12 @@ async function searchFromPortal(query: string): Promise<AgentoInfo> {
   return resultObject as AgentoInfo;
 }
 
-browser.runtime.onMessage.addListener((request) => {
-  return searchFromPortal(request.query);
+browser.runtime.onMessage.addListener(async (request) => {
+  try {
+    return await searchFromPortal(request.query);
+  } catch (e) {
+    return null;
+  }
 });
 
 // https://stackoverflow.com/questions/34957319/how-to-listen-for-url-change-with-chrome-extension

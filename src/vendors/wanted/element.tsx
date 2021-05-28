@@ -4,7 +4,7 @@ import styled from 'preact-css-styled';
 import AgentoInfo from '../../domain';
 
 interface WantedAgentoElementProps {
-  infoObject: AgentoInfo;
+  infoObject?: AgentoInfo;
   className?: string;
 }
 
@@ -52,10 +52,10 @@ export default function WantedAgentoElement({ infoObject, className }: WantedAge
     <AgentoElem id="agento-elem" className={className}>
       <h3>병역정보</h3>
       <table>
-        {Object.keys(infoObject).length === 0 && (
+        {!infoObject && (
           <p>{`검색 결과가 없습니다 :(\n사이트에 등록된 회사 이름에 따라 다를 수 있으므로 정확한 내용은 산업지원병역일터를 참고해주세요.`}</p>
         )}
-        {Object.keys(infoObject).length > 0 &&
+        {infoObject &&
           infoKeys.map((key) => (
             <tr>
               <th>{key}</th>
@@ -72,9 +72,10 @@ export default function WantedAgentoElement({ infoObject, className }: WantedAge
           ))}
       </table>
       <small>
-        {`${decodeURI(
-          infoObject.searchQuery
-        )} 검색어로 산업지원병역일터에서 검색한 결과입니다. 검색 결과가 부정확할 수 있으므로 회사이름을 클릭해 산업지원병역일터 페이지를 확인해주세요.`}
+        {infoObject &&
+          `${decodeURI(
+            infoObject.searchQuery
+          )} 검색어로 산업지원병역일터에서 검색한 결과입니다. 검색 결과가 부정확할 수 있으므로 회사이름을 클릭해 산업지원병역일터 페이지를 확인해주세요.`}
       </small>
     </AgentoElem>
   );
